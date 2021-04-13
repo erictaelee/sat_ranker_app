@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <p> {{ diff }} </p>
+    <p> {{ test }} </p>
   </div>
 </template>
 
@@ -25,6 +25,10 @@ export default {
         (this.selected_school.sat_critical_reading_avg_score + this.selected_school.sat_writing_avg_score) / 2 -
           this.selected_school.sat_math_avg_score
       );
+    },
+    test: () => {
+      console.log("test");
+      return this.schools[0];
     },
   },
   created: function () {
