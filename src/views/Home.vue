@@ -21,10 +21,13 @@ export default {
   computed: {
     diff: function () {
       console.log("diff");
-      return Math.abs(
-        (this.selected_school.sat_critical_reading_avg_score + this.selected_school.sat_writing_avg_score) / 2 -
-          this.selected_school.sat_math_avg_score
+      const reading = parseInt(
+        this.selected_school.sat_critical_reading_avg_score
       );
+      const writing = parseInt(this.selected_school.sat_writing_avg_score);
+      const math = parseInt(this.selected_school.sat_math_avg_score);
+
+      return Math.abs((reading + writing) / 2 - math);
     },
   },
   created: function () {
@@ -33,11 +36,13 @@ export default {
   methods: {
     indexSchools: function () {
       console.log("getting data...");
-      axios.get("https://data.cityofnewyork.us/resource/f9bf-2cp4.json").then((response) => {
-        console.log(response.data);
-        this.schools = response.data;
-        this.selected_school = this.schools[0];
-      });
+      axios
+        .get("https://data.cityofnewyork.us/resource/f9bf-2cp4.json")
+        .then((response) => {
+          console.log(response.data);
+          this.schools = response.data;
+          this.selected_school = this.schools[0];
+        });
     },
   },
 };
